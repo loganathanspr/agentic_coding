@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 
 app = FastAPI()
 
@@ -23,6 +23,25 @@ async def get_weather(city: str):
         "unit": "celsius"
     }
     return weather_data
+
+# Hardcoded lunch menu data
+lunch_menus = {
+    "monday": ["Pizza", "Salad", "Fruit"],
+    "tuesday": ["Burger", "Fries", "Apple"],
+    "wednesday": ["Pasta", "Garlic Bread", "Banana"],
+    "thursday": ["Chicken Rice", "Soup", "Orange"],
+    "friday": ["Fish", "Chips", "Grapes"],
+    "saturday": ["Sandwich", "Juice", "Cookie"],
+    "sunday": ["Wrap", "Smoothie", "Brownie"]
+}
+
+# Lunch menu endpoint
+@app.get("/lunch-menu")
+async def get_lunch_menu(day: str = Query(..., description="Day of the week")):
+    menu = lunch_menus.get(day.lower())
+    if menu:
+        return {"day": day.capitalize(), "menu": menu}
+    return {"error": "Menu not found for the given day."}
 
 if __name__ == "__main__":
     import uvicorn
