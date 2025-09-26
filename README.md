@@ -6,6 +6,7 @@ This is a simple FastAPI application that serves a "Hello, World!" message via H
 
 - GET `/` - Returns a JSON response with "Hello, World!" message
 - GET `/health` - Health check endpoint that returns status
+- GET `/lunch-menu?day=<day>` - Returns lunch menu for a specified day
 
 ## Requirements
 
@@ -87,5 +88,11 @@ You can test the API endpoints:
   curl http://localhost:8000/health
   ```
   Response: `{"status": "healthy"}`
+
+- Lunch menu endpoint:
+  ```bash
+  curl http://localhost:8000/lunch-menu?day=Monday
+  ```
+  Response: `{"day": "Monday", "menu": ["Pizza", "Salad", "Fruit"]}`
 
 - Interactive API documentation is available at `http://localhost:8000/docs`
