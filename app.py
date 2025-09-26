@@ -24,6 +24,7 @@ async def get_weather(city: str):
     }
     return weather_data
 
+<<<<<<< HEAD
 @app.get("/lunch-menu")
 async def get_lunch_menu(day: str = Query(..., description="Day of the week for which to get the lunch menu")):
     """Get lunch menu for a given day"""
@@ -69,6 +70,17 @@ async def get_lunch_menu(day: str = Query(..., description="Day of the week for 
         )
     
     return lunch_menus[day_lower]
+=======
+@app.get("/translate")
+async def translate(text: str, target_lang: str):
+    """Translate text to a target language"""
+    # Mock translation - in a real implementation, this would call a translation API
+    return {
+        "original_text": text,
+        "target_language": target_lang,
+        "translated_text": f"[{target_lang.upper()}] {text}"
+    }
+>>>>>>> origin/main
 
 if __name__ == "__main__":
     import uvicorn
