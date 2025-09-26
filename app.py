@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 
 app = FastAPI()
 
@@ -24,6 +24,53 @@ async def get_weather(city: str):
     }
     return weather_data
 
+<<<<<<< HEAD
+@app.get("/lunch-menu")
+async def get_lunch_menu(day: str = Query(..., description="Day of the week for which to get the lunch menu")):
+    """Get lunch menu for a given day"""
+    # Hardcoded lunch menu data for different days
+    lunch_menus = {
+        "monday": {
+            "day": "Monday",
+            "menu": ["Pizza", "Salad", "Fruit"]
+        },
+        "tuesday": {
+            "day": "Tuesday", 
+            "menu": ["Burger", "Soup", "Cookie"]
+        },
+        "wednesday": {
+            "day": "Wednesday",
+            "menu": ["Pasta", "Garlic Bread", "Apple"]
+        },
+        "thursday": {
+            "day": "Thursday",
+            "menu": ["Tacos", "Rice", "Orange"]
+        },
+        "friday": {
+            "day": "Friday",
+            "menu": ["Fish", "Chips", "Yogurt"]
+        },
+        "saturday": {
+            "day": "Saturday",
+            "menu": ["Sandwich", "Salad", "Banana"]
+        },
+        "sunday": {
+            "day": "Sunday",
+            "menu": ["Chicken", "Vegetables", "Ice Cream"]
+        }
+    }
+    
+    # Convert day to lowercase for case-insensitive matching
+    day_lower = day.lower()
+    
+    if day_lower not in lunch_menus:
+        raise HTTPException(
+            status_code=404, 
+            detail=f"No lunch menu found for '{day}'. Available days: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday"
+        )
+    
+    return lunch_menus[day_lower]
+=======
 @app.get("/translate")
 async def translate(text: str, target_lang: str):
     """Translate text to a target language"""
@@ -33,6 +80,7 @@ async def translate(text: str, target_lang: str):
         "target_language": target_lang,
         "translated_text": f"[{target_lang.upper()}] {text}"
     }
+>>>>>>> origin/main
 
 if __name__ == "__main__":
     import uvicorn
